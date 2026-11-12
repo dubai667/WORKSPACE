@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111111" />
+    <title>个人工作台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <span class="eyebrow">PRIVATE WORKSPACE / 01</span>
+          <h1>工作台</h1>
+        </div>
+        <div class="date-lockup">
+          <span class="eyebrow">TODAY</span>
+          <strong id="todayDate">—</strong>
+        </div>
+      </header>
+
+      <section class="summary-strip" aria-label="今日概览">
+        <div class="summary-main">
+          <span class="eyebrow">DAILY CONTROL</span>
+          <p id="dailyMessage">把今天要做的事写下来，逐件完成。</p>
+        </div>
+        <div class="summary-stat">
+          <span class="eyebrow">TODO</span>
+          <strong id="todoCount">0 / 0</strong>
+        </div>
+        <div class="summary-stat">
+          <span class="eyebrow">THIN MUSCLE</span>
+          <strong id="trainingCount">0 sets</strong>
+        </div>
+      </section>
+
+      <div class="workspace-grid">
+        <section class="panel tasks-panel" aria-labelledby="tasksTitle">
+          <div class="panel-heading">
+            <div>
+              <span class="section-index">01</span>
+              <h2 id="tasksTitle">每日事项</h2>
+            </div>
+            <div class="heading-actions"><button class="panel-meta panel-meta-button" type="button" data-open-history="task">DAILY RECORD</button><button class="icon-button" type="button" data-open-entry="task" aria-label="添加每日事项">+</button></div>
+          </div>
+          <div id="taskList" class="list-stack empty-state">还没有事项，先写下今天最重要的一件事。</div>
+        </section>
+
+        <section class="panel training-panel" aria-labelledby="trainingTitle">
+          <div class="panel-heading">
+            <div>
+              <span class="section-index">02</span>
+              <h2 id="trainingTitle">薄肌训练</h2>
+            </div>
+            <div class="heading-actions"><button class="icon-button" type="button" data-open-entry="training" aria-label="添加今日薄肌训练">+</button></div>
+          </div>
+          <div id="trainingList" class="list-stack empty-state">还没有薄肌训练。</div>
+        </section>
+
+        <section class="panel memo-panel" aria-labelledby="memoTitle">
+          <div class="panel-heading">
+            <div>
+              <span class="section-index">03</span>
+              <h2 id="memoTitle">备忘录</h2>
+            </div>
+            <div class="heading-actions"><button class="panel-meta panel-meta-button" type="button" data-open-history="memo">MORE</button><button class="icon-button" type="button" data-open-entry="memo" aria-label="添加备忘">+</button></div>
+          </div>
+          <div id="memoList" class="list-stack empty-state">这里可以放暂时不想忘记的东西。</div>
+        </section>
+      </div>
+
+      <footer class="footer-bar">
+        <span>LOCAL ONLY / DATA SAVED IN THIS BROWSER</span>
+        <button id="clearDataButton" type="button" class="text-button">清空本地数据</button>
+      </footer>
+    </main>
+    <dialog id="entryDialog" class="entry-dialog">
+      <div class="dialog-heading"><div><span class="eyebrow">NEW RECORD</span><h2 id="dialogTitle">添加记录</h2></div><button class="dialog-close" type="button" id="closeDialog" aria-label="关闭">×</button></div>
+      <form class="dialog-form" id="taskForm">
+        <label>事项<input id="taskInput" type="text" placeholder="例如：整理作品集首页" maxlength="100" autocomplete="off" required /></label>
+        <button type="submit" class="primary-button full-button">添加</button>
+      </form>
+      <form class="dialog-form" id="trainingForm">
+        <label>动作<input id="exerciseInput" type="text" placeholder="例如：俯卧撑" maxlength="40" required /></label>
+        <div class="form-row"><label>组数<input id="setsInput" type="number" min="1" max="99" placeholder="2" required /></label><label>次数<input id="repsInput" type="number" min="1" max="999" placeholder="10" required /></label></div>
+        <div class="form-row"><label>重量 / 只<input id="weightInput" type="text" placeholder="例如：3 kg（可选）" maxlength="20" /></label><label>备注<input id="trainingNoteInput" type="text" placeholder="可选" maxlength="40" /></label></div>
+        <button type="submit" class="primary-button full-button">添加</button>
+      </form>
+      <form id="memoForm" class="dialog-form">
+        <label>备忘内容<textarea id="memoInput" placeholder="记下一个想法、链接或提醒…" maxlength="600" required></textarea></label>
+        <div class="memo-actions"><span id="memoCounter">0 / 600</span><button type="submit" class="primary-button">添加</button></div>
+      </form>
+    </dialog>
+    <dialog id="historyDialog" class="entry-dialog history-dialog">
+      <div class="dialog-heading"><div><span class="eyebrow">DAILY ARCHIVE</span><h2 id="historyTitle">今日记录</h2></div><button class="dialog-close" type="button" id="closeHistory" aria-label="关闭">×</button></div>
+      <div id="historyContent" class="history-content"></div>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
